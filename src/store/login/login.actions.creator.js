@@ -38,7 +38,7 @@ export const getExercise = (className) => {
   }
 }
 
-export const getResults = (className) => {
+export const getResult = (className) => {
   return (dispatch) => {
     dispatch({ type: 'SET_PROCESSING', payload: true })
     return fetch(`https://nehruacademy-1d46.restdb.io/rest/results?q={"class":${className}}`, { headers: 
@@ -67,7 +67,7 @@ export const getHomework = (className) => {
 export const getClass = () => {
   return (dispatch) => {
     dispatch({ type: 'SET_PROCESSING', payload: true })
-    return fetch('https://nehruacademy-1d46.restdb.io/rest/classes', { headers: 
+    return fetch('https://nehruacademy-1d46.restdb.io/rest/classes?sort=id', { headers: 
     { 
       'x-apikey': '5e876350111788414066c610',
       'Content-Type': 'application/json' 

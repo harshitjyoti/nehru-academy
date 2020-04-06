@@ -12,7 +12,6 @@ const Admin = () => {
   const [fileList, setFileList] = useState([]);
   const [form] = Form.useForm();
   useEffect(() => {
-    console.log("formRef")
     fetchClass();
   }, [])
   const normFile = e => {
@@ -133,7 +132,7 @@ const Admin = () => {
 
   const fetchClass = () => {
     setLoading(true)
-    db.classes.find({}, {}, function (err, res) {
+    db.classes.find({}, {"$orderby": {"id": 1}}, function (err, res) {
       if (!err) {
         setLoading(false);
         setClasses(res)
@@ -196,9 +195,8 @@ const Admin = () => {
           </Select><br />
           <Form.Item
             name="upload"
-            
             valuePropName="fileList">
-            <Upload {...props} multiple fileList={fileList}>
+            <Upload {...props} multiple >
               <Button>
                 <UploadOutlined /> Upload Results
         </Button>

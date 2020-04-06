@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import InitApp from './container';
 import Exercise from './container/exercises';
+import Homework from './container/homework';
+import Results from './container/results';
 import { Drawer, Button, Tabs } from 'antd';
 import Admin from './container/Admin';
+import logo from "./logo.png"
 import { DownOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 export const db = new window.restdb("5e876350111788414066c610");
+
 const App = () => {
 
   const [visible, setVisible] = useState(false);
@@ -15,7 +19,7 @@ const App = () => {
 
   const onClose = () => setVisible(false)
   return (<>
-    <div className='header'>Nehru Academy</div>
+    <div className='header'><img src= {logo} width="150px"/> Nehru Academy</div>
     <div className='btn'>
       <Button onClick={showDrawer}>
         <MenuUnfoldOutlined /> Open This
@@ -38,6 +42,8 @@ const App = () => {
     </div>
     <Route exact path='/' component={InitApp} />
     <Route exact path='/exercises' component={Exercise} />
+    <Route exact path='/results' component={Results} />
+    <Route exact path='/homework' component={Homework} />
     <Route exact path='/admin' component={Admin} />
   </>
   );
