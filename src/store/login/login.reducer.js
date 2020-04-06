@@ -1,9 +1,13 @@
 import { updateProfileDetails } from './login.actions';
 import { superUser } from '../../constants';
 const INITIAL_STATE = {
-  userDetails: null,
+  gallery: null,
   isProcessing: false,
-  hasError: false,
+  classes: null,
+  exercise: null,
+  homework: null,
+  result: null,
+  notice: null,
   isSuperUser: false,
   isUserFetched: false
 }
@@ -11,43 +15,21 @@ const INITIAL_STATE = {
 const profileReducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
-    case 'RESET_USER':
+    case 'SET_PROCESSING':
       return {
         ...state,
-        isUserFetched: false
+        isProcessing: action.payload
       }
-    case 'LOGOUT':
+    case 'GALLERY':
+    case 'NOTICE':
+    case 'CLASSES':
+    case 'EXERCISE':
+    case 'RESULT':
+    case 'HOMEWORK':
       return {
         ...state,
-        isUserFetched: false,
-        userDetails: null
-      }
-    case updateProfileDetails.REQUEST:
-      return {
-        ...state,
-        isProcessing: true
-      }
-    case updateProfileDetails.SUCCESS:
-      let user = null;
-      const { response, userDetails: { password, user: name } } = action.payload
-      if (response.count) {
-        user = response.results.filter((user) =>
-          (user.birth_year === password) && (user.name === name)
-        )
-        user = user.length === 1 ? user[0] : null;
-      }
-      return {
-        ...state,
-        userDetails: user,
-        isSuperUser: user && user.name === superUser,
-        isProcessing: false,
-        isUserFetched: true
-      }
-    case updateProfileDetails.ERROR:
-      return {
-        ...state,
-        isProcessing: false,
-        hasError: true
+        [action.type.toLowerCase()]: action.payload,
+        isProcessing: false
       }
     default:
       return state

@@ -1,0 +1,33 @@
+@media (max-width: 567px) {
+    ul.images {
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+}
+}
+.home {
+  text-align: center;
+  padding: 10px;
+  font-size: 25px;
+}
+.heading {
+    position: absolute;
+    margin: auto;
+    padding: 5px;
+    font-size: 15px;
+    line-height: 1;
+    float: left;
+    color: black;
+    text-align: left;
+  };
+
+  div.fullscreen-group {
+      height: 100vh !important;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 15;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+  }
