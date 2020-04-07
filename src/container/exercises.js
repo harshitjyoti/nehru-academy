@@ -34,7 +34,8 @@ class Exercise extends React.Component {
   render() {
     const { exercise, classes, isProcessing } = this.props;
     return (<div style={{ textAlign: 'center' }}>
-      <Select placeholder="Select class" loading={isProcessing} style={{ width: 140, margin: 20 }} onChange={this.handleChange}>
+      <h2>Daily Exercises !</h2>
+      <Select placeholder="Select class" loading={isProcessing} style={{ width: 140 }} onChange={this.handleChange}>
         {classes && classes.map((c) => <Option value={c.id}>{c.name}</Option>)}
 
       </Select>

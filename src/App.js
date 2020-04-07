@@ -19,7 +19,9 @@ const App = () => {
 
   const onClose = () => setVisible(false)
   return (<>
-    <div className='header'><img src= {logo} width="150px"/> Nehru Academy</div>
+    <Link to={'/'} >
+      <div className='header'><img src={logo} width="150px" /> Nehru Academy</div>
+    </Link>
     <div className='btn'>
       <Button onClick={showDrawer}>
         <MenuUnfoldOutlined /> Open This
@@ -33,9 +35,10 @@ const App = () => {
       >
         <Tabs defaultActiveKey="1" tabPosition={'vertical'} style={{ height: 220 }}>
           <TabPane key={'1'}>
-            <Link to={'/exercises'} onClick={onClose}>Daily Exercise</Link><hr/>
-            <Link to={'/homework'} onClick={onClose}>Daily Homework</Link><hr/>
-            <Link to={'/results'} onClick={onClose}>Results</Link><hr/>
+            <Link to={'/'} onClick={onClose}>Go Home</Link><hr />
+            <Link to={'/exercises'} onClick={onClose}>Daily Exercise</Link><hr />
+            <Link to={'/homework'} onClick={onClose}>Daily Homework</Link><hr />
+            <Link to={'/results'} onClick={onClose}>Results</Link><hr />
           </TabPane>
         </Tabs>
       </Drawer>

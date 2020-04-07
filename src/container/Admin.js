@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, Collapse, Upload, Button, Input, Form, Select  } from 'antd';
+import { Layout, Collapse, Upload, Button, Input, Form, Select } from 'antd';
 
 import { db } from '../App';
 import { UploadOutlined } from '@ant-design/icons';
@@ -49,10 +49,10 @@ const Admin = () => {
   const addExercise = () => {
     if (value && fileList.length && className) {
       setLoading(true)
-        var obj = new db.exercises({ title: value, class: className, exercise: fileList });
-        obj.save(() => 
-            reset()
-        );
+      var obj = new db.exercises({ title: value, class: className, exercise: fileList });
+      obj.save(() =>
+        reset()
+      );
     }
   }
 
@@ -132,7 +132,7 @@ const Admin = () => {
 
   const fetchClass = () => {
     setLoading(true)
-    db.classes.find({}, {"$orderby": {"id": 1}}, function (err, res) {
+    db.classes.find({}, { "$orderby": { "id": 1 } }, function (err, res) {
       if (!err) {
         setLoading(false);
         setClasses(res)
@@ -140,127 +140,120 @@ const Admin = () => {
     });
   }
 
-  return <div style={{height: '100vh'}}>
+  return <div style={{ height: '100vh' }}>
     <Form form={form}>
-    <Layout className="layout">
-      <Collapse accordion>
-        <Collapse.Panel header={'Add Class'} >
-          <Input placeholder="Class Name" value={value} onChange={change} disabled={loading} /><hr />
-          <Button onClick={addClass} loading={loading}>Add Class</Button>
-        </Collapse.Panel><hr />
-        <Collapse.Panel header={'Add Exercise'} on>
-          <Select
-            value={className}
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Select a class"
-            optionFilterProp="children"
-            onChange={(value) => setClassName(value)}
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {classes.map((item) => {
-              return <Select.Option value={item.id} >{item.name}</Select.Option>
-            })}
-          </Select><br />
-          <Form.Item
-            name="upload"
-            getValueFromEvent={normFile}
-            valuePropName="fileList" />
-          <Upload {...props} multiple >
-            <Button>
-              <UploadOutlined /> Upload Exercises
-        </Button>
-          </Upload><Form.Item /><br />
-          <Input placeholder="Title" value={value} onChange={change} disabled={loading} /><hr />
-          <Button onClick={addExercise} loading={loading}>Add Exercise</Button>
-        </Collapse.Panel><hr />
-        <Collapse.Panel header={'Add Results'} on>
-          <Select
-
-            value={className}
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Select a class"
-            optionFilterProp="children"
-            onChange={(value) => setClassName(value)}
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {classes.map((item) => {
-              return <Select.Option value={item.id} >{item.name}</Select.Option>
-            })}
-          </Select><br />
-          <Form.Item
-            name="upload"
-            valuePropName="fileList">
+      <Layout className="layout">
+        <Collapse accordion>
+          <Collapse.Panel header={'Add Class'} >
+            <Input placeholder="Class Name" value={value} onChange={change} disabled={loading} /><hr />
+            <Button onClick={addClass} loading={loading}>Add Class</Button>
+          </Collapse.Panel><hr />
+          <Collapse.Panel header={'Add Exercise'} on>
+            <Select
+              value={className}
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Select a class"
+              optionFilterProp="children"
+              onChange={(value) => setClassName(value)}
+              filterOption={(input, option) =>
+                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {classes.map((item) => {
+                return <Select.Option value={item.id} >{item.name}</Select.Option>
+              })}
+            </Select><br />
+            <Form.Item
+              name="upload"
+              getValueFromEvent={normFile}
+              valuePropName="fileList" />
             <Upload {...props} multiple >
               <Button>
-                <UploadOutlined /> Upload Results
+                <UploadOutlined /> Upload Exercises
         </Button>
-            </Upload> </Form.Item><br />
-
-          <Input placeholder="Title" value={value} onChange={change} disabled={loading} /><hr />
-          <Button onClick={addResults} loading={loading}>Add Results</Button>
-        </Collapse.Panel><hr />
-        <Collapse.Panel header={'Add Homework'} on>
-          <Select
-            showSearch
-            value={className}
-            style={{ width: 200 }}
-            placeholder="Select a class"
-            optionFilterProp="children"
-            onChange={(value) => setClassName(value)}
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {classes.map((item) => {
-              return <Select.Option value={item.id} >{item.name}</Select.Option>
-            })}
-          </Select><br />
-          <Form.Item
-            name="upload"
-            
-            valuePropName="fileList">
-            <Upload {...props} multiple >
-              <Button>
-                <UploadOutlined /> Upload Results
-        </Button>
-            </Upload><br />
+            </Upload><Form.Item /><br />
             <Input placeholder="Title" value={value} onChange={change} disabled={loading} /><hr />
-          </Form.Item>
-          <Button onClick={addHomework} loading={loading}>Add Homework</Button>
-        </Collapse.Panel><hr />
-        <Collapse.Panel header={'Add Gallery'} >
-          <Form.Item
-            name="upload"
-            
+            <Button onClick={addExercise} loading={loading}>Add Exercise</Button>
+          </Collapse.Panel><hr />
+          <Collapse.Panel header={'Add Results'} on>
+            <Select
+
+              value={className}
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Select a class"
+              optionFilterProp="children"
+              onChange={(value) => setClassName(value)}
+              filterOption={(input, option) =>
+                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {classes.map((item) => {
+                return <Select.Option value={item.id} >{item.name}</Select.Option>
+              })}
+            </Select><br />
+            <Form.Item
+              name="upload"
+              valuePropName="fileList">
+              <Upload {...props} multiple >
+                <Button>
+                  <UploadOutlined /> Upload Results
+        </Button>
+              </Upload> </Form.Item><br />
+
+            <Input placeholder="Title" value={value} onChange={change} disabled={loading} /><hr />
+            <Button onClick={addResults} loading={loading}>Add Results</Button>
+          </Collapse.Panel><hr />
+          <Collapse.Panel header={'Add Homework'} on>
+            <Select
+              showSearch
+              value={className}
+              style={{ width: 200 }}
+              placeholder="Select a class"
+              optionFilterProp="children"
+              onChange={(value) => setClassName(value)}
+              filterOption={(input, option) =>
+                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {classes.map((item) => {
+                return <Select.Option value={item.id} >{item.name}</Select.Option>
+              })}
+            </Select><br />
+            <Form.Item
+              name="upload"
+
+              valuePropName="fileList">
+              <Upload {...props} multiple >
+                <Button>
+                  <UploadOutlined /> Upload Results
+        </Button>
+              </Upload><br />
+              <Input placeholder="Title" value={value} onChange={change} disabled={loading} /><hr />
+            </Form.Item>
+            <Button onClick={addHomework} loading={loading}>Add Homework</Button>
+          </Collapse.Panel><hr />
+          <Collapse.Panel header={'Add Gallery'} >
             valuePropName="fileList">
             <Upload {...props} multiple>
               <Button>
                 <UploadOutlined /> Upload Gallery
         </Button>
-            </Upload></Form.Item><br />
-          <Button onClick={addGallery} loading={loading}>Add Gallery</Button>
-        </Collapse.Panel><hr />
-        <Collapse.Panel header={'Add Notice'} >
-          <Form.Item
-            name="upload"
-            
-            valuePropName="fileList">
+            </Upload><br />
+            <Button onClick={addGallery} loading={loading}>Add Gallery</Button>
+          </Collapse.Panel><hr />
+          <Collapse.Panel header={'Add Notice'} >
             <Upload {...props} multiple>
               <Button>
                 <UploadOutlined /> Upload Notice
         </Button>
-            </Upload></Form.Item><br />
-          <Button onClick={addNotice} loading={loading}>Add Notice</Button>
-        </Collapse.Panel><hr />
-      </Collapse>
-    </Layout>
-  </Form>
+            </Upload><br />
+            <Button onClick={addNotice} loading={loading}>Add Notice</Button>
+          </Collapse.Panel><hr />
+        </Collapse>
+      </Layout>
+    </Form>
   </div>
 }
 

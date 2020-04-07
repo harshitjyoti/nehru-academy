@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Carousel, Tabs } from 'antd';
+import { Carousel, Spin } from 'antd';
 import { getGallery, getNotice } from '../store/login/login.actions.creator';
 import './index.css'
 class InitApp extends React.Component {
@@ -16,20 +16,23 @@ class InitApp extends React.Component {
   }
 
   render() {
-    const { gallery, notice } = this.props;
+    const { gallery, notice, isProcessing } = this.props;
     return (<div class="home">
-      <h4>Gallery</h4>
+      {isProcessing ? <Spin style={{marginTop: '25%'} }spinning={true} tip={'Loading . . .'}/>
+       : <>{gallery && !!gallery.length && <><h4>Gallery</h4>
       <Carousel autoplay>
-        {gallery && gallery.map((img) => {
+        {gallery.map((img) => {
           return <img src={'https://nehruacademy-1d46.restdb.io//media/' + img.image} />
         })}
-      </Carousel>
-      <h4>Notice Board</h4>
+      </Carousel></>}
+      {notice && !!notice.length!=0 &&  <><h4>Notice Board</h4>
       <Carousel autoplay>
-        {notice && notice.map((img) => {
+        {notice.map((img) => {
           return <img src={'https://nehruacademy-1d46.restdb.io//media/' + img.image} />
         })}
-      </Carousel>
+      </Carousel></>}
+      {(!gallery || !gallery.length ) && (!notice || !notice.length ) && !isProcessing && <h2>Data Coming Soon !</h2>}
+      </>}
     </div>
     );
   }
@@ -38,7 +41,8 @@ class InitApp extends React.Component {
 const mstp = (state) => {
   return {
     gallery: state.user.gallery,
-    notice: state.user.notice
+    notice: state.user.notice,
+    isProcessing: state.user.isProcessing
   }
 }
 
