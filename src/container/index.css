@@ -2,6 +2,15 @@
     ul.images {
       grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
 }
+
+.header {
+  font-size: 40px !important;
+
+}
+
+.header img {
+  width: 130px;
+}
 }
 .ant-spin-spinning {
   margin-top: 25%;
